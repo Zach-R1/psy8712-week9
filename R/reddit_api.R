@@ -25,7 +25,8 @@ rstats_tbl %>%
   labs(x = "Upvotes", y = "Comments", title = "Relationship Between upvotes and comments")
 
 # Analysis
-
-
+cor <- cor.test(rstats_tbl$upvotes, rstats_tbl$comments)
+cor
 
 # Publication
+paste0("The correlation between upvotes and comments was r(", cor$parameter, ") = ", cor$estimate, ", p = ", cor$p.value, ". This test ", ifelse(cor$p.value < 0.05, "was", "was not") ," statistically significant.")
