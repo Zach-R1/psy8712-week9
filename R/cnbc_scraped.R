@@ -3,6 +3,9 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(rvest)
 library(tidyverse)
 
+
+# Data Import and Cleaning
+
 sections <- list(
   Business = "https://www.cnbc.com/business/",
   Investing = "https://www.cnbc.com/investing/",
@@ -25,12 +28,16 @@ for(i in seq_along(sections)) {
   )
 }
 
-
-
-#Data Import and Cleaning
-
-# Analysis
+cnbc_tbl <- bind_rows(cnbc_list)
 
 # Visualization
+cnbc_tbl %>%
+  ggplot(aes(source, length)) +
+  geom_boxplot() +
+  labs(title = "Comparison of headline length by section")
+
+
+
+# Analysis
 
 # Publication
