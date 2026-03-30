@@ -42,7 +42,7 @@ anova_model <- aov(length ~ source, data = cnbc_tbl) # Standard ANOVA
 
 # Publication
 
-#"The results of an ANOVA comparing lengths across sources was F(3, 130) = 2.84, p = .04. This test was statistically significant."
+# "The results of an ANOVA comparing lengths across sources was F(3, 130) = 2.98, p = .03. This test  statistically significant."
 
 aov_sum <- summary(anova_model) # Pull summary 
 aov_tbl <- aov_sum[[1]] # Extract table 
@@ -50,4 +50,4 @@ aov_tbl <- aov_sum[[1]] # Extract table
 
 # Degrees of freedom already has no decimal displayed no changes needed. Used paste0 to concatenate text and dynamic entries. Used sub to remove leading zeros and ifelse to dynamically select was/was not significant
 
-paste0("The results of an ANOVA comparing lengths across sources was F(", aov_tbl[1, "Df"], ", ", aov_tbl[2, "Df"], ") = ",round(aov_tbl$'F'[1], 2), ", p = ", sub("^0", "", round(aov_tbl$'Pr(>F)'[1], 2)), ". This test ", ifelse(cor$p.value < 0.05, "was", "was not") ," statistically significant.")
+paste0("The results of an ANOVA comparing lengths across sources was F(", aov_tbl[1, "Df"], ", ", aov_tbl[2, "Df"], ") = ",round(aov_tbl$'F'[1], 2), ", p = ", sub("^0", "", round(aov_tbl$'Pr(>F)'[1], 2)), ". This test ", ifelse(aov_tbl$p.value < 0.05, "was", "was not") ," statistically significant.")
